@@ -1,0 +1,61 @@
+<center>
+<h1>相性診断</h1>
+<h3><br></h3>
+<% unless @users.find_by(id: params[:user_id]).user_name.nil? %>
+    <h2><%= @users.find_by(id: params[:user_id]).user_name %>さん</h2>
+<% else %>
+    <h2><%= @users.find_by(id: params[:user_id]).email %>さん</h2>
+<% end %>
+<div class="arrow"style="padding: 1em 2em; width: 500px; margin: 0 auto; font-size: xx-large; text-align: center;">
+    ↓
+</div>
+<div class="boxgreen" style="padding: 1em 2em; width: 500px; margin: 0 auto;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #80FF00;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);">
+    <% @top_difference.each do |d| %>
+<% unless @users.find_by(id: d[0]).user_name.nil? %>
+    <p style="margin: 0; padding: 0; text-align: center;"><%= @users.find_by(id: d[0]).user_name %>さん</p>
+<% else %>
+    <p style="margin: 0; padding: 0; text-align: center;"><%= @users.find_by(id: d[0]).email %>さん</p>
+<% end %>
+    <% end %>
+</div>
+
+<div class="arrow"style="padding: 1em 2em; width: 500px; margin: 0 auto; font-size: xx-large; text-align: center;">
+    ↓
+</div>
+<div class="boxyellow" style="padding: 1em 2em; width: 500px; margin: 0 auto;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #FFFF00;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);">
+    <% @middle_difference.each do |d| %>
+<% unless @users.find_by(id: d[0]).user_name.nil? %>
+    <p style="margin: 0; padding: 0; text-align: center;"><%= @users.find_by(id: d[0]).user_name %>さん</p>
+<% else %>
+    <p style="margin: 0; padding: 0; text-align: center;"><%= @users.find_by(id: d[0]).email %>さん</p>
+<% end %>
+    <% end %>
+</div>
+
+<div class="arrow" align="center" style="padding: 1em 2em; font-size: xx-large;">
+    ↓
+</div>
+<div class="boxred" style="padding: 1em 2em; width: 500px; margin: 0 auto;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #FF8000;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);">
+    <% @bottom_difference.each do |d| %>
+<% unless @users.find_by(id: d[0]).user_name.nil? %>
+    <p style="margin: 0; padding: 0; text-align: center;"><%= @users.find_by(id: d[0]).user_name %>さん</p>
+<% else %>
+    <p style="margin: 0; padding: 0; text-align: center;"><%= @users.find_by(id: d[0]).email %>さん</p>
+<% end %>
+    <% end %>
+</div>
+<h1><br></h1>
+<%= link_to 'ホームに戻る', managers_path %>
+</center>

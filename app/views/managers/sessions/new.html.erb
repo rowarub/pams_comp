@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "pams/session", :media => "all" %>
+
+<div class="form-wrapper" >
+  <h1>Dashboard</h1>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-item">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "管理者ID" %>
+    </div>
+
+
+    <div class="form-item">
+      <%= f.password_field :password, autocomplete: "off", placeholder: "パスワード" %>
+    </div>
+
+    <div class="form-item">
+    </div>
+
+
+    <div class="button-panel">
+      <%= f.submit "Log in", class: "button" %>
+    </div>
+  <% end %>
+  <div class="form-footer">
+  </div>
+</div>

@@ -1,0 +1,494 @@
+@charset "utf-8";
+$black: #231815;
+$white: #fff;
+$gray: #9fa0a0;
+$green: #8fc31f;
+$orange: #f8b62d;
+$blue: #54c3f1;
+$yellow: #fff352;
+@page{
+	margin: 0;
+	size: landscape;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+body{
+	position: relative;
+	margin: 0 auto;
+	width: 297mm;
+	font-size: 10px;
+	font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+	-webkit-print-color-adjust: exact; //only chrome?
+}
+h2.box{
+	margin: 0;
+	font-size: 6mm;
+	font-weight: normal;
+}
+p{
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: justify;
+}
+.text{
+	width: 200%;
+	line-height: 200%;
+	font-size: 14px;
+	-webkit-transform: scale3d(0.5, 0.5, 1);
+	-webkit-transform-origin: 0px 0px;
+}
+/*
+ * 共通部分
+ */
+.flex{
+	display: flex;
+	&.mdl{
+		align-items: center;
+	}
+	&.dircol{
+		flex-direction: column;
+	}
+}
+.relative{
+	position: relative;
+	.btm{
+		position: absolute;
+		bottom: 0;
+	}
+}
+section.page{
+	height: 209mm;
+	padding: 10mm;
+	page-break-after: always;
+}
+//ヘッダー
+header{
+	border-top: 0.4mm solid $black;
+	border-bottom: 0.4mm solid $black;
+	padding: 1mm 0;
+	.wrap{
+		border-top: 0.2mm solid $black;
+		border-bottom: 0.2mm solid $black;
+		height: 10mm;
+		display: flex;
+		align-items: center;
+		.item{
+			margin-left: 5mm;
+			.h{
+				margin-right: 3mm;
+			}
+		}
+	}
+}
+
+.header-title{
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+.profile{
+	display: flex;
+	flex-grow: 1;
+	justify-content: flex-end;
+}
+
+//コンテンツ部分
+main{
+	height: 171mm;
+	padding-top: 5mm;
+	border-bottom: 0.2mm solid $black;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+	.col{
+		width: 50%;
+		&.left{
+			padding-right: 3.5mm;
+		}
+		&.right{
+			padding-left: 3.5mm;
+		}
+	}
+}
+
+.row+.row{
+	margin-top: 3mm;
+	padding-top: 3mm;
+	border-top: 0.25px solid $black;
+}
+#page-2{
+	.row + .row{
+		padding-top: 4mm;
+	}
+}
+#page-3{
+	main{
+		padding-bottom: 5mm;
+	}
+	.row{
+		flex-grow: 1;
+	}
+}
+#page-4{
+	.row + .row{
+		margin-top: 2mm;
+		padding-top: 4mm;
+	}
+}
+#page-2, #page-4{
+	main{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		& > .row{
+			flex-grow: 1;
+			&:first-child{
+				flex-grow: 0;
+			}
+		}
+	}
+}
+
+#page-3, #page-4{
+	main{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+footer{
+	border-top: 0.4mm solid $black;
+	text-align: center;
+	margin-top: 1mm;
+	padding-top: 1mm;
+}
+
+.box1{
+	width: 22mm;
+	height: 6mm;
+}
+.box2{
+	width: 16mm;
+	height: 8mm;
+}
+.box1, .box2{
+	color: $white;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.box1, .box2, .left-box, .right-box{
+	&.gray{
+		background-color: $gray!important;
+	}
+	&.green{
+		background-color: $green!important;
+	}
+	&.orange{
+		background-color: $orange!important;
+	}
+	&.blue{
+		background-color: $blue!important;
+	}
+	&.yellow{
+		background-color: $yellow!important;
+	}
+}
+table{
+	border-spacing: 0;
+}
+
+//レーダーチャート
+.chart{
+	display: flex;
+	.left, .right{
+		position: relative;
+		width: 22mm;
+		.top, .middle, .bottom{
+			position: absolute;
+		}
+		.top{
+			top: 0;
+		}
+		.middle{
+			top: 0;
+			bottom: 0;
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+		.bottom{
+			bottom: 0;
+		}
+	}
+	.left{
+		.top, .middle, .bottom{
+			left: auto;
+			right: 0;
+		}
+	}
+	.ctr{
+		padding: 0 4mm;
+		text-align: center;
+		#figure2-1{
+			width: 80%;
+		}
+	}
+	.rate{
+		.per{
+			color: $black;
+			border-left: 0.4mm solid $gray;
+			border-bottom: 0.4mm solid $gray;
+			border-right: 0.4mm solid $gray;
+		}
+	}
+	.kouteki, .shiteki{
+		font-size: 4mm;
+		width: 16mm;
+		height: 8mm;
+	}
+	.kouteki{
+		color: $green;
+	}
+	.shiteki{
+		color: $orange;
+	}
+}
+#chart-1{
+	padding-bottom: 4mm;
+	border-bottom: 0.2mm solid $black;
+	position: relative;
+	height: 75mm;
+	.box{
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-weight: normal;
+	}
+	#figure1-1{
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 79mm;
+		height: 66mm;
+	}
+	.rate{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+	.midashi{
+		margin: 0;
+		font-size: 4mm;
+		font-weight: normal;
+	}
+	.per{
+		text-align: right;
+		font-size: 4mm;
+	}
+}
+
+.score-list{
+	text-align: left;
+	padding-top: 2mm;
+	height: 78mm;
+	table{
+		border-spacing: 0 2mm;
+		height: 100%;
+	}
+	th{
+		width: 20mm;
+		font-weight: normal;
+	}
+	.score{
+		width: 11mm;
+		color: $blue;
+	}
+	.score-content{
+		letter-spacing: 0;
+	}
+}
+h2.type{
+	font-size: 6mm;
+	color: $blue;
+	margin: 0 0 2mm;
+	padding: 0 0 5mm;
+	border-bottom: 0.2mm solid $black;
+}
+.type-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	h3{
+		margin-top: 2mm;
+		margin-bottom: 2mm;
+		font-size: 4mm;
+		font-weight: normal;
+	}
+	ul{
+		padding-left: 2mm;
+		margin: 0;
+		list-style: none;
+		li{
+			position: relative;
+			margin-bottom: 1mm;
+			&::before{
+				content: "";
+				display: block;
+				width: 0.5mm;
+				height: 0.5mm;
+				border-radius: 50%;
+				background-color: $black !important;
+				position: absolute;
+				top: -0.5mm;
+				bottom: 0;
+				left: -1mm;
+				margin: auto;
+			}
+		}
+	}
+}
+
+.score-cm{
+	display: flex;
+	margin-bottom: 3mm;
+	font-weight: bold;
+	.score-item{
+		width: 15mm;
+	}
+	.score{
+		color: $blue;
+		width: 11mm;
+	}
+	.description{
+	}
+}
+
+.stress{
+	display: flex;
+	margin-bottom: 3mm;
+	font-weight: bold;
+	.item{
+		width: 19mm;
+	}
+	.lmh{
+		color: $blue;
+		width: 11mm;
+	}
+	.description{
+	}
+	.point-img{
+		flex-grow: 1;
+		text-align: right;
+	}
+}
+
+.hor-graph1{
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	.left-box, .right-box{
+		width: 15mm;
+		height: 12mm;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid $black;
+	}
+	.graph{
+		position: relative;
+		width: 93mm;
+		height: 12mm;
+		background-image: url(/assets/bar.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin: 0 4mm;
+		.bar{
+			position: absolute;
+			width: 1mm;
+			height: 5mm;
+			background-color: $black!important;
+			margin: auto;
+			top: 0;
+			bottom: 0;
+			right: auto;
+			transform: translateX(-0.5mm);
+		}
+	}
+}
+
+.hor-graph2{
+	width: 131mm;
+	height: 12mm;
+	position: relative;
+	display: flex;
+	align-items: center;
+	.score-cm{
+		margin-bottom: 0;
+		& > div{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+	.bar{
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: auto;
+		width: 100%;
+		background-color: $yellow;
+		z-index: -1;
+	}
+}
+
+.para-graph2{
+	width: 131mm;
+	height: 34mm;
+	border-top: 0.25px solid $black;
+	border-bottom: 0.25px solid $black;
+	margin: 5mm 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.graph{
+		width: 100%;
+		height: auto;
+	}
+}
+
+.stress-box{
+	width: 45mm;
+	height: 7mm;
+	border: 1px solid $black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.score{
+		color: $blue;
+		margin-left: 5mm;
+	}
+}
+
+#point-main{
+	margin-left: 5mm;
+	flex-direction: row-reverse;
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	img{
+		width: auto;
+		height: 6mm;
+	}
+}

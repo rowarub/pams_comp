@@ -1,0 +1,1626 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--<meta name="viewport" content="width=1188,initial-scale=1">-->
+<%= stylesheet_link_tag "pams/style", :media => "all" %>
+<script src="Chart.min.js"></script>
+<title>PaMS_img_10</title>
+</head>
+
+<body>
+<section id="page-1" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <!-- <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p> -->
+      </div>
+    </div>
+  </header>
+  <main class="col-row">
+    <div class="col up">
+      <div class="chart1-1">
+        <div class="item">
+          <div class="head"><%= image_tag "chart1-1.svg", alt: "" %>
+            <!-- <img src="img/chart1-1.svg" alt=""> -->
+          </div>
+          <div class="graph">
+            <div class="desc">
+              <p>定着傾向にある人<span class="per"><%= @a_rate_of_steady %>%</span></p>
+              <p>離職傾向にある人<span class="per"><%= @a_rate_of_turnover %>%</span></p>
+            </div>
+            <div class="chart-container" style="width: 44mm; height: 44mm;">
+              <canvas id="chart1-1"></canvas>
+              <script>
+              var ctx1_1 = document.getElementById('chart1-1').getContext('2d');
+              var chart1_1 = new Chart(ctx1_1, {
+                  // 作成するグラフの種類
+                  type: 'doughnut',
+
+                  // ラベルとデータセットを設定
+                  data: {
+                      labels: [
+                    "離職傾向にある人",
+                    "定着傾向にある人"
+                  ],
+                      datasets: [{
+                          label: "My First dataset",
+                          backgroundColor: [
+                      'rgb(181, 181, 182)',
+                      'rgb(250, 238, 0)',
+                    ],
+                    borderWidth: 0,
+                          data: [<%= @a_rate_of_turnover %>, <%= @a_rate_of_steady %>],
+                      }]
+                  },
+
+                  // オプション設定
+                  options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  legend: {
+                    display: false
+                  }
+                }
+              });
+              </script>
+            </div>
+          </div>
+        </div>
+        <%= image_tag "chart1-1c.svg", alt: "", class: "center" %>
+        <!-- <img src="img/chart1-1c.svg" alt="" class="center"> -->
+        <div class="item">
+          <div class="head">
+            <%= image_tag "chart1-2.svg", alt: "" %>
+            <!-- <img src="img/chart1-2.svg" alt=""> -->
+          </div>
+          <div class="graph">
+            <div class="chart-container" style="width: 44mm; height: 44mm;">
+              <canvas id="chart1-2"></canvas>
+              <script>
+              var ctx1_2 = document.getElementById('chart1-2').getContext('2d');
+              var chart1_2 = new Chart(ctx1_2, {
+                  // 作成するグラフの種類
+                  type: 'doughnut',
+
+                  // ラベルとデータセットを設定
+                  data: {
+                      labels: [
+                    "離職傾向にある人",
+                    "定着傾向にある人"
+                  ],
+                      datasets: [{
+                          label: "My First dataset",
+                          backgroundColor: [
+                      'rgb(181, 181, 182)',
+                      'rgb(250, 238, 0)',
+                    ],
+                    borderWidth: 0,
+                          data: [<%= @neo_a_rate_of_turnover %>, <%= @neo_a_rate_of_steady %>],
+                      }]
+                  },
+
+                  // オプション設定
+                  options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  legend: {
+                    display: false
+                  }
+                }
+              });
+              </script>
+            </div>
+            <div class="desc">
+              <p>定着傾向にある人<span class="per"><%= @neo_a_rate_of_steady %>%</span></p>
+              <p>離職傾向にある人<span class="per"><%= @neo_a_rate_of_turnover %>%</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <table border="1">
+          <tr>
+            <th colspan="2">課題対策の重要度ランキング</th>
+            <th>現状</th>
+            <th>目標</th>
+          </tr>
+          <% @ranking_r.each.with_index(1) do |r, i| %>
+            <tr>
+              <th><%= i %>位</th>
+              <td><%= r[2] %></td>
+              <td><%= (r[4] * 10).round(1) %></td>
+              <td><%= (r[5] * 10).round(1) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="col down">
+      <div style="flex: 0 0 30%;" class="table1-2">
+        <table border="1">
+          <tr>
+            <th colspan="2">優先すべき特徴ランキング</th>
+            <th width="20%;">乖離度</th>
+          </tr>
+          <% @difference_subject_result.each.with_index(1) do |subject, i| %>
+          <tr>
+            <th><%= i %></th>
+            <td class="td"><%= subject[0] %></td>
+            <td><%= subject[1].round(1) %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="chart1-3" style="flex: 0 0 70%;">
+        <div class="item">
+          <div class="head"><%= image_tag "chart1-3.svg", alt: "" %></div>
+          <!-- <img src="img/chart1-3.svg" alt=""> -->
+          <div class="chart-container" style="width: 80mm; height: 80mm;">
+            <canvas id="chart1-3-l"></canvas>
+            <script>
+            var ctx1_3_l = document.getElementById('chart1-3-l').getContext('2d');
+            var chart1_3_l = new Chart(ctx1_3_l, {
+                // 作成するグラフの種類
+                type: 'radar',
+
+                // ラベルとデータセットを設定
+                data: {
+                    labels: [
+                  "楽観性",
+                  "充実性",
+                  "内向/外向",
+                  "思慮/行動",
+                  "積極性",
+                  "感受性",
+                  "尊重性",
+                  "柔軟/革新",
+                  "論理/直観",
+                  "協調性"
+                ],
+                    datasets: [{
+                        label: "採用すべき人物像",
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(243, 152, 0)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(243, 152, 0)',
+                        data: [<%= @sub_upper_result[0] %>, <%= @sub_upper_result[1] %>, <%= @sub_upper_result[2] %>, <%= @sub_upper_result[3] %>, <%= @sub_upper_result[4] %>, <%= @sub_upper_result[5] %>, , , , ],
+                    },{
+                        label: "採用すべき人物像",
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(34, 172, 56)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(34, 172, 56)',
+                        data: [<%= @sub_upper_result[0] %>, , , , , <%= @sub_upper_result[5] %>, <%= @sub_upper_result[6] %>, <%= @sub_upper_result[7] %>, <%= @sub_upper_result[8] %>, <%= @sub_upper_result[9] %>],
+                    }]
+                },
+
+                // オプション設定
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scale: {
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                  },
+                  angleLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  gridLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  yAxes: [{
+                    ticks: {
+                      max: 10,
+                      min: 0,
+                      stepSize: 10
+                    }
+                  }]
+                },
+              }
+            });
+            </script>
+
+          </div>
+        </div>
+          <!-- <img src="img/chart1-34.svg" alt="" class="desc"> -->
+        <div class="item">
+          <div class="head">
+            <%= image_tag "chart1-4.svg", alt: "" %>
+            <!-- <img src="img/chart1-4.svg" alt=""> -->
+          </div>
+          <div class="chart-container" style="width: 80mm; height: 80mm;">
+            <canvas id="chart1-3-r"></canvas>
+            <script>
+            var ctx1_3_r = document.getElementById('chart1-3-r').getContext('2d');
+            var chart1_3_r = new Chart(ctx1_3_r, {
+                // 作成するグラフの種類
+                type: 'radar',
+
+                // ラベルとデータセットを設定
+                data: {
+                    labels: [
+                  "楽観性",
+                  "充実性",
+                  "内向/外向",
+                  "思慮/行動",
+                  "積極性",
+                  "感受性",
+                  "尊重性",
+                  "柔軟/革新",
+                  "論理/直観",
+                  "協調性"
+                ],
+                    datasets: [{
+                        label: "採用すべきでない人物像",
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(243, 152, 0)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(243, 152, 0)',
+                        data: [<%= @sub_lower_result[0] %>, <%= @sub_lower_result[1] %>, <%= @sub_lower_result[2] %>, <%= @sub_lower_result[3] %>, <%= @sub_lower_result[4] %>, <%= @sub_lower_result[5] %>, , , , ],
+                    },{
+                        label: "採用すべきでない人物像",
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(34, 172, 56)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(34, 172, 56)',
+                        data: [<%= @sub_lower_result[0] %>, , , , , <%= @sub_lower_result[5] %>, <%= @sub_lower_result[6] %>, <%= @sub_lower_result[7] %>, <%= @sub_lower_result[8] %>, <%= @sub_lower_result[9] %>],
+                    }]
+                },
+
+                // オプション設定
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scale: {
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                  },
+                  angleLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  gridLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  yAxes: [{
+                    ticks: {
+                      max: 10,
+                      min: 0,
+                      stepSize: 10
+                    }
+                  }]
+                }
+              }
+            });
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+</section>
+
+<section id="page-2" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <!-- <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p> -->
+      </div>
+    </div>
+  </header>
+  <main class="row">
+    <div class="col left">
+      <div class="chart2">
+        <div class="head">
+          <%= image_tag "chart2-1.svg", alt: "" %>
+          <!-- <img src="img/chart2-1.svg" alt=""> -->
+        </div>
+        <div class="item">
+          <div class="chart-container" style="width: 94mm; height: 94mm;">
+            <canvas id="chart2-1"></canvas>
+            <script>
+            var ctx2_1 = document.getElementById('chart2-1').getContext('2d');
+            var chart2_1 = new Chart(ctx2_1, {
+                // 作成するグラフの種類
+                type: 'radar',
+
+                // ラベルとデータセットを設定
+                data: {
+                    labels: [
+                  "社長/上司の魅力",
+                  "入社前後のギャップ",
+                  "処遇・待遇",
+                  "会社方針・風土",
+                  "将来性",
+                  "ワークライフバランス",
+                  "女性の働きやすさ",
+                  "人間関係",
+                  "評価方法",
+                  "仕事内容"
+                ],
+                    datasets: [{
+                        label: "採用すべきでない人物像",
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(237, 109, 70)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(237, 109, 70)',
+                        data: [53, 48, 53, 48, 50, 42, 39, 54, 45, 55],
+                    },{
+                        label: "採用すべきでない人物像",
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(46, 167, 224)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(46, 167, 224)',
+                        data: [60, 65, 78, 64, 85, 30, 57, 70, 82, 68],
+                    }]
+                },
+
+                // オプション設定
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scale: {
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                  },
+                  angleLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  gridLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  yAxes: [{
+                    ticks: {
+                      max: 10,
+                      min: 0,
+                      stepSize: 10
+                    }
+                  }]
+                }
+              }
+            });
+            </script>
+
+          </div>
+          <%= image_tag "chart2-1d.svg", alt: "" %>
+          <!-- <img src="img/chart2-1d.svg" alt=""> -->
+        </div>
+      </div>
+      <div>
+        <table border="1" class="table2-a">
+          <tr>
+            <th colspan="2">総合得点</th>
+            <th>総合評価</th>
+          </tr>
+          <tr>
+            <td>547.4/<span class="small">1000</span></td>
+            <td>業界平均　515.0</td>
+            <td>D評価</td>
+          </tr>
+        </table>
+        <table border="1" class="table2-b">
+          <tr>
+            <th>社長/上司の魅力</th>
+            <th>入社前後のギャップ</th>
+            <th>処遇・待遇</th>
+            <th>会社方針・風土</th>
+            <th>将来性</th>
+          </tr>
+          <tr>
+            <td><%= @date[0].round(1) %><span class="small">(---)</span></td>
+            <td><%= @date[1].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[2].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[3].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[4].round(1) %><span class="small">(--;-)</span></td>
+          </tr>
+          <tr>
+            <th>ワークライフバランス</th>
+            <th>女性の働きやすさ</th>
+            <th>人間関係</th>
+            <th>評価方法</th>
+            <th>仕事内容</th>
+          </tr>
+          <tr>
+            <td><%= @date[5].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[6].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[7].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[8].round(1) %><span class="small">(--;-)</span></td>
+            <td><%= @date[9].round(1) %><span class="small">(--;-)</span></td>
+          </tr>
+        </table>
+        <table border="1">
+          <tr>
+            <th>満足度平均以上</th>
+            <th>離職傾向にある人</th>
+          </tr>
+          <tr>
+            <td><%= @user_count_rate_2 %>人/<span class="small"><%= @user_count %>人中</span></td>
+            <td><%= @user_count_rate_1 %>人/<span class="small"><%= @user_count %>人中</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col right">
+      <div class="chart2">
+        <div class="head">
+          <%= image_tag "chart2-2.svg", alt: "" %>
+          <!-- <img src="img/chart2-2.svg" alt=""> -->
+        </div>
+        <div class="item">
+          <div class="chart-container" style="width: 94mm; height: 94mm;">
+            <canvas id="chart2-2"></canvas>
+            <script>
+            var ctx2_2 = document.getElementById('chart2-2').getContext('2d');
+            var chart2_2 = new Chart(ctx2_2, {
+                // 作成するグラフの種類
+                type: 'radar',
+
+                // ラベルとデータセットを設定
+                data: {
+                    labels: [
+                  "楽観性",
+                  "充実性",
+                  "内向/外向",
+                  "思慮/行動",
+                  "積極性",
+                  "感受性",
+                  "尊重性",
+                  "柔軟/革新",
+                  "論理/直観",
+                  "協調性"
+                ],
+                    datasets: [{
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(243, 152, 0)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(243, 152, 0)',
+                        data: [<%= @company_personal_examinations[0].round(1) %>, <%= @company_personal_examinations[1].round(1) %>, <%= @company_personal_examinations[2].round(1) %>, <%= @company_personal_examinations[3].round(1) %>, <%= @company_personal_examinations[4].round(1) %>, <%= @company_personal_examinations[5].round(1) %>, , , , ],
+                    },{
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(34, 172, 56)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(34, 172, 56)',
+                        data: [<%= @company_personal_examinations[0].round(1) %>, , , , , <%= @company_personal_examinations[5].round(1) %>, <%= @company_personal_examinations[6].round(1) %>, <%= @company_personal_examinations[7].round(1) %>, <%= @company_personal_examinations[8].round(1) %>, <%= @company_personal_examinations[9].round(1) %>],
+                    }]
+                },
+
+                // オプション設定
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scale: {
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                  },
+                  angleLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  gridLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  yAxes: [{
+                    ticks: {
+                      max: 10,
+                      min: 0,
+                      stepSize: 10
+                    }
+                  }]
+                }
+              }
+            });
+            </script>
+          </div>
+          <%= image_tag "chart2-2d.svg", alt: "" %>
+          <!-- <img src="img/chart2-2d.svg" alt=""> -->
+        </div>
+      </div>
+      <div>
+        <table border="1" class="table2-a">
+          <tr>
+            <th>欲求バランス</th>
+            <th>数値の信頼度</th>
+          </tr>
+          <tr>
+            <td><span class="bold"><%= @balance_of_you %></span></td>
+            <td>89.8%</td>
+          </tr>
+        </table>
+        <table border="1" class="table2-b">
+          <tr>
+            <th>楽観性</th>
+            <th>充実性</th>
+            <th>内向/外向</th>
+            <th>思慮/行動</th>
+            <th>積極性</th>
+          </tr>
+          <tr>
+            <% @company_personal_examinations.each.with_index(1) do |r, i| %>
+            <% break if i >= 6 %>
+            <td><%= r.round(1) %></td>
+          <% end %>
+          </tr>
+          <tr>
+            <th>感受性</th>
+            <th>尊重性</th>
+            <th>柔軟/革新</th>
+            <th>論理/直感</th>
+            <th>協調性</th>
+          </tr>
+          <tr>
+            <% @company_personal_examinations.each.with_index(1) do |r, i| %>
+              <% if i >= 6 %>
+                <td><%= r.round(1) %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        </table>
+        <table border="1">
+          <tr>
+            <th colspan="4">現在の人材傾向</th>
+            <th rowspan="2" class="bold"><%= @condition_branch_mana_type %></th>
+          </tr>
+          <tr>
+            <td><%= @condition_branch_trend_1 %></td>
+            <td><%= @condition_branch_trend_2 %></td>
+            <td><%= @condition_branch_trend_3 %></td>
+            <td><%= @condition_branch_trend_4 %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+</section>
+<section id="page-3" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <!-- <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p> -->
+      </div>
+    </div>
+  </header>
+  <main class="row">
+    <section class="chart3 col left">
+      <div class="head">
+        <%= image_tag "table3-1.svg", alt: "" %>
+        <!-- <img src="img/table3-1.svg" alt=""> -->
+      </div>
+      <table border="1">
+        <tr>
+          <th>①社長/上司の魅力</th>
+          <th>②入社前後のギャップ</th>
+          <th>③処遇・待遇</th>
+          <th>④会社方針・風土</th>
+          <th>⑤将来性</th>
+        </tr>
+        <tr>
+          <% @ranking.each.with_index(1) do |r, i| %>
+            <% break if i >= 6 %>
+            <td><%= r[4].round(2) * 10 %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th>⑥ワークライフバランス</th>
+          <th>⑦女性の働きやすさ</th>
+          <th>⑧人間関係</th>
+          <th>⑨評価方法</th>
+          <th>⑩仕事内容</th>
+        </tr>
+        <tr>
+        <% @ranking.each.with_index(1) do |r, i| %>
+          <% if i >= 6 %>
+            <td><%= r[4].round(2) * 10 %></td>
+          <% end %>
+        <% end %>
+      </tr>
+      </table>
+      <div>
+        <div class="chart-container" style="width: 130mm; height: 74mm;">
+          <canvas id="chart3-1" width="491" height="280"></canvas>
+          <script>
+          var dataSet3_1 = [
+            [<%= @satisfaction_10[0] %>, <%= @priority_10[0] %>],
+            [<%= @satisfaction_10[1] %>, <%= @priority_10[1] %>],
+            [<%= @satisfaction_10[2] %>, <%= @priority_10[2] %>],
+            [<%= @satisfaction_10[3] %>, <%= @priority_10[3] %>],
+            [<%= @satisfaction_10[4] %>, <%= @priority_10[4] %>],
+            [<%= @satisfaction_10[5] %>, <%= @priority_10[5] %>],
+            [<%= @satisfaction_10[6] %>, <%= @priority_10[6] %>],
+            [<%= @satisfaction_10[7] %>, <%= @priority_10[7] %>],
+            [<%= @satisfaction_10[8] %>, <%= @priority_10[8] %>],
+            [<%= @satisfaction_10[9] %>, <%= @priority_10[9] %>]
+          ];
+
+
+          var verticalWrite = function(context, text, x, y) {
+            "use strict";
+            var textList = text.split('\n');
+            var lineHeight = context.measureText("あ").width;
+            textList.forEach(function(elm, i) {
+              Array.prototype.forEach.call(elm, function(ch, j) {
+                context.fillText(ch, x-lineHeight*i, y+lineHeight*j);
+              });
+            });
+          };
+
+          var chart3_1 = document.getElementById('chart3-1');
+          var ctx3_1 = chart3_1.getContext('2d');
+          //斜め上下左右
+          ctx3_1.strokeStyle = 'rgb(0, 0, 0)';
+          ctx3_1.strokeRect(0, 0, 100, 20);
+          ctx3_1.strokeRect(391, 0, 100, 20);
+          ctx3_1.strokeRect(0, 260, 100, 20);
+          ctx3_1.strokeRect(391, 260, 100, 20);
+          //上下左右
+          ctx3_1.fillStyle = 'rgb(46, 167, 224)';
+          ctx3_1.fillRect(195, 0, 100, 20);
+          ctx3_1.fillRect(195, 260, 100, 20);
+          ctx3_1.fillRect(0, 90, 20, 100);
+          ctx3_1.fillRect(471, 90, 20, 100);
+          //線
+          ctx3_1.beginPath();
+          ctx3_1.moveTo(20, 140);
+          ctx3_1.lineTo(471, 140);
+          ctx3_1.stroke();
+          ctx3_1.moveTo(245, 20);
+          ctx3_1.lineTo(245, 260);
+          ctx3_1.stroke();
+          //text
+          ctx3_1.fill = ('12px "メイリオ"');
+          ctx3_1.fillStyle = 'rgb(0, 0, 0)';
+          ctx3_1.fillText('弱み', 38, 14);
+          ctx3_1.fillText('強味', 429, 14);
+          ctx3_1.fillText('潜在リスク', 24, 274);
+          ctx3_1.fillText('過剰満足', 421, 274);
+          ctx3_1.fillStyle = 'rgb(255, 255, 255)';
+          ctx3_1.fillText('重要度 高', 222, 14);
+          ctx3_1.fillText('重要度 低', 222, 274);
+          verticalWrite(ctx3_1, '満足度 低', 5, 120);
+          verticalWrite(ctx3_1, '満足度 高', 476, 120);
+
+          dataSet3_1 = mapDataShited( dataSet3_1 );
+          ctx3_1.fill = ('14px "メイリオ"');
+          ctx3_1.fillStyle = 'rgb(0, 0, 0)';
+          for(var i = 0; i < 10; i++){
+            ctx3_1.fillText(convertNum(i), mapDataX3_1( dataSet3_1[i][0] ), mapDataY3_1( dataSet3_1[i][1] ));
+          }
+
+
+          function mapDataShited(dataSet){
+            "use strict";
+            var fontSize = 1;
+            var flag = true;
+            while(flag){
+              for(var i = 0; i < dataSet.length; i++){
+                for(var j = i + 1; j < dataSet.length; j++){
+                  if( dataSet[i][0] === dataSet[j][0] ){
+                    if( dataSet[i][1] === dataSet[j][1] ){
+                      dataSet[i][0] -= fontSize;
+                      dataSet[j][0] += fontSize;
+                      flag = true;
+                    } else {
+                      flag = false;
+                    }
+                  } else{
+                    flag = false;
+                  }
+                  if(flag){
+                    break;
+                  }
+                }
+                if(flag){
+                  break;
+                }
+              }
+            }
+            return dataSet;
+          }
+
+          function mapDataX3_1(data){
+            "use strict";
+            data *= 4.35;
+            data += 24;
+            return data;
+          }
+          function mapDataY3_1(data){
+            "use strict";
+            data *= -2.24;
+            data += 256;
+            return data;
+          }
+          function convertNum(n){
+            "use strict";
+            if( n === 0){
+              return '①';
+            } else if( n === 1){
+              return '②';
+            } else if( n === 2){
+              return '③';
+            } else if( n === 3){
+              return '④';
+            } else if( n === 4){
+              return '⑤';
+            } else if( n === 5){
+              return '⑥';
+            } else if( n === 6){
+              return '⑦';
+            } else if( n === 7){
+              return '⑧';
+            } else if( n === 8){
+              return '⑨';
+            } else if( n === 9){
+              return '⑩';
+            } else {
+              return n;
+            }
+          }
+          </script>
+        </div>
+      </div>
+      <div class="head">
+        <%= image_tag "table3-2.svg", alt: "" %>※（　）内の経営者様/上司の重要度になります。
+        <!-- <img src="img/table3-2.svg" alt=""> -->
+      </div>
+      <table border="1">
+        <tr>
+          <% @priority_rank_sort_fin.each.with_index(1) do |r, i| %>
+            <% break if i >= 6 %>
+            <th><%= r[1] %></th>
+          <% end %>
+        </tr>
+        <tr>
+          <% @priority_rank_sort_fin.each.with_index(1) do |r, i| %>
+            <% break if i >= 6 %>
+            <td><%= r[5] %><%= r[6] %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% @priority_rank_sort_fin.each.with_index(1) do |r, i| %>
+          <% if i >= 6 %>
+            <th><%= r[1] %></th>
+          <% end %>
+        <% end %>
+        </tr>
+        <tr>
+          <% @priority_rank_sort_fin.each.with_index(1) do |r, i| %>
+          <% if i >= 6 %>
+            <td><%= r[5] %><%= r[6] %></td>
+          <% end %>
+        <% end %>
+        </tr>
+      </table>
+    </section>
+    <section class="sec3-2 col">
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">社長/上司の魅力<br><%= @q_101_103.round(1) %></div>
+        <div style="width: 144px; height: 43px;">
+          <canvas id="chart3-2-1" width="144" height="43"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[0].round(1) %>, <%= @user_answers_q_101_130[1].round(1) %>, <%= @user_answers_q_101_130[2].round(1) %>];
+
+var chart3_2_1 = document.getElementById('chart3-2-1');
+
+var ctx3_2 = chart3_2_1.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>社長/上司はリーダーシップがある</p>
+          <p>社長は尊敬できる</p>
+          <p>意見を気兼ねなく社長/上司に発言できる</p>
+        </div>
+      </div>
+      <div class="item" style="margin: 10px 0px;">
+        <div class="head">入社前後のギャップ<br><%= @q_104_106.round(1) %></div>
+        <div style="width: 144px; height: 43px;">
+          <canvas id="chart3-2-2" width="144" height="43"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[3].round(1) %>,<%= @user_answers_q_101_130[4].round(1) %>,<%= @user_answers_q_101_130[5].round(1) %>];
+
+var chart3_2_2 = document.getElementById('chart3-2-2');
+
+var ctx3_2 = chart3_2_2.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>入社前に仕事内容や条件について十分な説明を受けた</p>
+          <p>就業規則を入社前に見た</p>
+          <p>求人内容（募集概要）と現実とで相違点はなかった</p>
+        </div>
+      </div>
+            <div class="item" style="margin: 10px 0px;">
+        <div class="head">処遇・待遇<br><%= @q_107_110.round(1) %></div>
+        <div style="width: 144px; height: 58px;">
+          <canvas id="chart3-2-3" width="144" height="58"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[6].round(1) %>, <%= @user_answers_q_101_130[7].round(1) %>, <%= @user_answers_q_101_130[8].round(1) %>, <%= @user_answers_q_101_130[9].round(1) %>];
+
+var chart3_2_3 = document.getElementById('chart3-2-3');
+
+var ctx3_2 = chart3_2_3.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>（仕事内容に対して）給料に満足している</p>
+          <p>勤務地は希望を受け入れてもらえる</p>
+          <p>給料以外の諸手当（福利厚生など）に満足している</p>
+          <p>残業代は適切に支給されている</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">会社方針","風土<br><%= @q_111_113.round(1) %></div>
+        <div style="width: 144px; height: 43px;">
+          <canvas id="chart3-2-4" width="144" height="43"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[10].round(1) %>, <%= @user_answers_q_101_130[11].round(1) %>, <%= @user_answers_q_101_130[12].round(1) %>];
+
+var chart3_2_4 = document.getElementById('chart3-2-4');
+
+var ctx3_2 = chart3_2_4.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>職場の安全","衛生面に満足している</p>
+          <p>経営理念を適切に理解し、共感できている</p>
+          <p>社風に満足している</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">将来性<br><%= @q_114_115.round(1) %></div>
+        <div style="width: 144px; height: 28px;">
+          <canvas id="chart3-2-5" width="144" height="28"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[13].round(1) %>, <%= @user_answers_q_101_130[14].round(1) %>];
+
+var chart3_2_5 = document.getElementById('chart3-2-5');
+
+var ctx3_2 = chart3_2_5.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>成長性のある会社である</p>
+          <p>リストラの心配はない</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">ワークライフバランス<br><%= @q_116_118.round(1) %></div>
+        <div style="width: 144px; height: 43px;">
+          <canvas id="chart3-2-6" width="144" height="43"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[15].round(1) %>, <%= @user_answers_q_101_130[16].round(1) %>, <%= @user_answers_q_101_130[17].round(1) %>];
+
+var chart3_2_6 = document.getElementById('chart3-2-6');
+
+var ctx3_2 = chart3_2_6.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>勤務時間は適切である</p>
+          <p>休暇日数、有給休暇に満足している</p>
+          <p>心と体の健康状態は良好である</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">女性の働きやすさ<br><%= @q_119_120.round(1) %></div>
+        <div style="width: 144px; height: 28px;">
+          <canvas id="chart3-2-7" width="144" height="28"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[18].round(1) %>, <%= @user_answers_q_101_130[19].round(1) %>];
+
+var chart3_2_7 = document.getElementById('chart3-2-7');
+
+var ctx3_2 = chart3_2_7.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>産休、育休を気兼ねなくとれる環境である</p>
+          <p>昇格","昇給に男女差がない</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">人間関係<br><%= @q_121_124.round(1) %></div>
+        <div style="width: 144px; height: 58px;">
+          <canvas id="chart3-2-8" width="144" height="58"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[20].round(1) %>, <%= @user_answers_q_101_130[21].round(1) %>, <%= @user_answers_q_101_130[22].round(1) %>, <%= @user_answers_q_101_130[23].round(1) %>];
+
+var chart3_2_8 = document.getElementById('chart3-2-8');
+
+var ctx3_2 = chart3_2_8.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>社内（上司、先輩、後輩など）の人間関係は良好である</p>
+          <p>社外（顧客や取引業者など）の人間関係は良好である</p>
+          <p>上司は信頼","尊敬できお手本となる人物である</p>
+          <p>職場ないにパワハラ","セクハラはない</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">評価方法<br><%= @q_125_126.round(1) %></div>
+        <div style="width: 144px; height: 28px;">
+          <canvas id="chart3-2-9" width="144" height="28"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[24].round(1) %>, <%= @user_answers_q_101_130[25].round(1) %>];
+
+var chart3_2_9 = document.getElementById('chart3-2-9');
+
+var ctx3_2 = chart3_2_9.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>成果に対して正当に評価されている</p>
+          <p>一部に人が利益","不利益になるような評価方法ではない</p>
+        </div>
+      </div>
+                  <div class="item" style="margin: 10px 0px;">
+        <div class="head">仕事内容<br><%= @q_127_130.round(1) %></div>
+        <div style="width: 144px; height: 58px;">
+          <canvas id="chart3-2-10" width="144" height="58"></canvas>
+          <script>
+function calcDataWidth(data){
+  "use strict";
+  data *= 1.44;
+  return data;
+}
+
+var dataSet3_2 = [<%= @user_answers_q_101_130[26].round(1) %>, <%= @user_answers_q_101_130[27].round(1) %>, <%= @user_answers_q_101_130[28].round(1) %>, <%= @user_answers_q_101_130[29].round(1) %>];
+
+var chart3_2_10 = document.getElementById('chart3-2-10');
+
+var ctx3_2 = chart3_2_10.getContext('2d');
+
+var canvasHeight;
+  if(dataSet3_2.length === 2){
+    canvasHeight = 28;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+  } else if(dataSet3_2.length === 3){
+    canvasHeight = 43;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+  } else {
+    canvasHeight = 58;
+    //グラフの描画
+    ctx3_2.fillStyle = ('rgb(250, 238, 0)');
+    ctx3_2.fillRect(0, 0, calcDataWidth(dataSet3_2[0]), 13);
+    ctx3_2.fillRect(0, 15, calcDataWidth(dataSet3_2[1]), 13);
+    ctx3_2.fillRect(0, 30, calcDataWidth(dataSet3_2[2]), 13);
+    ctx3_2.fillRect(0, 45, calcDataWidth(dataSet3_2[2]), 13);
+
+    ctx3_2.fill = ('10px "メイリオ"');
+    ctx3_2.fillStyle = ('rgb(0, 0, 0)');
+    ctx3_2.fillText(dataSet3_2[0], 120, 10);
+    ctx3_2.fillText(dataSet3_2[1], 120, 25);
+    ctx3_2.fillText(dataSet3_2[2], 120, 40);
+    ctx3_2.fillText(dataSet3_2[2], 120, 55);
+  }
+  //縦線の描画
+  ctx3_2.beginPath();
+  ctx3_2.moveTo(0, 0);
+  ctx3_2.lineTo(0, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(72, 0);
+  ctx3_2.lineTo(72, canvasHeight);
+  ctx3_2.stroke();
+  ctx3_2.moveTo(144, 0);
+  ctx3_2.lineTo(144, canvasHeight);
+  ctx3_2.stroke();
+          </script>
+        </div>
+        <div class="desc">
+          <p>仕事にやりがいがある</p>
+          <p>裁量のある仕事を与えられている</p>
+          <p>仕事を通して自分の成長を感じられている</p>
+          <p>教育環境に満足している</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+</section>
+<script src="script.js"></script>
+<%= link_to 'ホームに戻る', managers_path(id: current_manager.id) %>
+</body>
+</html>
+
+
+
+

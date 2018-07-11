@@ -1,0 +1,15 @@
+current directory: /Users/itou_ooji/re_japan_test/pams_07_06/vendor/bundle/ruby/2.3.0/gems/bootsnap-1.3.0/ext/bootsnap
+/Users/itou_ooji/.rbenv/versions/2.3.1/bin/ruby -r ./siteconf20180706-42475-1wkh3zw.rb extconf.rb
+creating Makefile
+
+current directory: /Users/itou_ooji/re_japan_test/pams_07_06/vendor/bundle/ruby/2.3.0/gems/bootsnap-1.3.0/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/itou_ooji/re_japan_test/pams_07_06/vendor/bundle/ruby/2.3.0/gems/bootsnap-1.3.0/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/itou_ooji/re_japan_test/pams_07_06/vendor/bundle/ruby/2.3.0/gems/bootsnap-1.3.0/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20180706-42475-1eu9qfu/bootsnap

@@ -1,0 +1,15 @@
+<%= form_for @user_info do |f|%>
+  <div>
+    <%= f.text_field :user_name, placeholder: "氏名", required: true %>
+  </div>
+  <div>
+    <%= f.text_field :user_department, placeholder: "部署名", required: true %>
+  </div>
+  <div>
+    <label><%= f.radio_button :user_sex, "男", required: true %> 男 </label>
+    <label><%= f.radio_button :user_sex, "女", required: true %> 女</label>
+  </div>
+  <div>
+    <%= f.submit "送信" %>
+  </div>
+<% end %>

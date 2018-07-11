@@ -1,0 +1,331 @@
+@charset "utf-8";
+$black: #231815;
+$white: #fff;
+$gray: #9fa0a0;
+$green: #8fc31f;
+$orange: #f8b62d;
+$blue: #54c3f1;
+$yellow: #fff352;
+@page{
+	margin: 0;
+	size: landscape;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+body{
+	position: relative;
+	margin: 0 auto;
+	width: 297mm;
+	font-size: 10px;
+	font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+	-webkit-print-color-adjust: exact; //only chrome?
+}
+h2.box{
+	margin: 0;
+	font-size: 6mm;
+	font-weight: normal;
+}
+p{
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: justify;
+}
+.text{
+	width: 200%;
+	line-height: 200%;
+	font-size: 14px;
+	-webkit-transform: scale3d(0.5, 0.5, 1);
+	-webkit-transform-origin: 0px 0px;
+}
+/*
+ * 共通部分
+ */
+.flex{
+	display: flex;
+	&.mdl{
+		align-items: center;
+	}
+	&.dircol{
+		flex-direction: column;
+	}
+}
+.relative{
+	position: relative;
+	.btm{
+		position: absolute;
+		bottom: 0;
+	}
+}
+.bold{
+	font-weight: bold;
+}
+section.page{
+	height: 209mm;
+	padding: 10mm;
+	page-break-after: always;
+}
+canvas {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	width: 100%;
+}
+.chart-container{
+	width: 100%;
+	position: relative;
+}
+table{
+	width: 100%;
+	th, td{
+		font-weight: normal;
+		text-align: center;
+	}
+}
+//ヘッダー
+header{
+	border-top: 0.4mm solid $black;
+	border-bottom: 0.4mm solid $black;
+	padding: 1mm 0;
+	.wrap{
+		border-top: 0.2mm solid $black;
+		border-bottom: 0.2mm solid $black;
+		height: 10mm;
+		display: flex;
+		align-items: center;
+		.item{
+			margin-left: 5mm;
+			.h{
+				margin-right: 3mm;
+			}
+		}
+	}
+}
+
+.header-title{
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+.profile{
+	display: flex;
+	flex-grow: 1;
+	justify-content: flex-end;
+}
+
+//コンテンツ部分
+main{
+	height: 171mm;
+	padding-top: 5mm;
+	padding-bottom: 5mm;
+	border-bottom: 0.2mm solid $black;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+	.col{
+		width: 50%;
+		&.left{
+			padding-right: 3.5mm;
+		}
+		&.right{
+			padding-left: 3.5mm;
+		}
+	}
+}
+
+.row+.row{
+	margin-top: 3mm;
+	padding-top: 3mm;
+	border-top: 0.25px solid $black;
+}
+.col-row{
+	display: flex;
+	flex-wrap: wrap;
+}
+#page-1{
+	.up, .down{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+	.up{
+		border-bottom: 1px solid #000;
+		height: 45%;
+		padding-bottom: 3mm;
+	}
+	.down{
+		height: 55%;
+		padding-top: 3mm;
+	}
+}
+#page-2{
+	.row + .row{
+		padding-top: 4mm;
+	}
+}
+footer{
+	border-top: 0.4mm solid $black;
+	text-align: center;
+	margin-top: 1mm;
+	padding-top: 1mm;
+}
+
+.box1{
+	width: 22mm;
+	height: 6mm;
+}
+.box2{
+	width: 16mm;
+	height: 8mm;
+}
+.box1, .box2{
+	color: $white;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.box1, .box2, .left-box, .right-box{
+	&.gray{
+		background-color: $gray!important;
+	}
+	&.green{
+		background-color: $green!important;
+	}
+	&.orange{
+		background-color: $orange!important;
+	}
+	&.blue{
+		background-color: $blue!important;
+	}
+	&.yellow{
+		background-color: $yellow!important;
+	}
+}
+table{
+	border-spacing: 0;
+	border-collapse: collapse;
+	th, td{
+		font-weight: normal;
+		border: 1px solid #000;
+		padding: 1mm 2mm;
+	}
+}
+
+.chart1-1{
+	display: flex;
+	width: 180mm;
+	.center{
+		padding: 70px 1mm;
+	}
+	.head{
+		padding: 0 10mm 8mm;
+	}
+	.item{
+		width: 300px;
+	}
+	.graph{
+		display: flex;
+		justify-content: space-around;
+		.per{
+			display: block;
+			font-size: 36px;
+		}
+	}
+	.desc{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+
+.table1-2{
+	position: relative;
+	table{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 80%;
+	}
+	.td{
+		text-align: left;
+		width: 80%;
+	}
+}
+
+.chart1-3{
+	display: flex;
+	.item{
+		width: 50%;
+		.head{
+			padding: 0 5mm;
+		}
+	}
+	.desc{
+		width: 100px;
+		padding: 60px 5px 0;
+	}
+}
+
+.chart2{
+	.head{
+		img{
+			display: block;
+			width: 50mm;
+			margin: 0 auto;
+		}
+	}
+	.item{
+		display: flex;
+		img{
+			width: 120px;
+		}
+	}
+	.chart-container{
+		flex-shrink: 0;
+	}
+}
+.table2-a{
+	margin-bottom: 3mm;
+}
+.table2-b{
+	margin-bottom: 5mm;
+}
+
+.chart3{
+	.head{
+		margin-bottom: 3mm;
+		img{
+			width: 40mm;
+		}
+	}
+	.chart-container{
+		margin: 5mm auto;
+	}
+}
+
+.sec3-2{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	& > .item{
+		display: flex;
+		.head{
+			width: 32mm;
+			flex-shrink: 0;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.chart-container{}
+		.desc{
+			padding-left: 2mm;
+		}
+	}
+}

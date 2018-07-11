@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag "pams/temporary", :media => "all" %>
+
+<center>
+<h3>ようこそ<%= current_user.email %>さん</h3>
+
+
+<table>
+  <tbody>
+    <% @pams_answers.each do |pams_answer| %>
+      <tr>
+        <% if pams_answer.fin_flag == false %>
+          <td><h2>＜重要＞アンケートに回答お願いします</h2></td>
+          <td><%= pams_answer.created_at %></td>
+          <td><%= link_to '回答する', edit_pams_answer_path(pams_answer) %></td>
+        <% else %>
+          <td></td>
+          <td><%= pams_answer.created_at %></td>
+          <td><%= link_to '※回答済み※', pams_answer %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</center>

@@ -1,0 +1,164 @@
+<%= stylesheet_link_tag "pams/radio_button", :media => "all" %>
+
+<%= form_with(model: pams_answer, local: true) do |form| %>
+
+<table class="form_table">
+  <hr>
+  <h1>
+    Q1〜Q100:以下の質問項目について、当てはまるものを選んでください。
+  </h1>
+  <hr>
+  <tr class="th_tr">
+    <th class="_q_">
+    <th class="q_th">
+    </th>
+    <th class="form_th">
+      <div class="node_th">
+        <div style="float: left">当てはまる</div>
+        <div style="text-align: right">当てはまらない</div>
+      </div>
+    </th>
+  </tr>
+  <% @questions_1_100.each.with_index(1) do |(q_key, q_value), q_i| %>
+      <tr class="td_tr">
+      <td>Q<%= q_i %></td>
+      <td><label><%= q_value %></label></td>
+      <td class="form">
+        <div class="nodes">
+        <% @answers_1_100.each do |a_key, a_value| %>
+            <div class="node">
+              <%= form.radio_button q_key, a_key, required: true, class: "form__radio", type: "radio" %>
+              <label class="form__label" for="pams_answer_<%= q_key %>_<%= a_key %>"><span class="indicator"><%= a_value %></span></label>
+            </div>
+        <% end %>
+        </div>
+      </td>
+      </tr>
+  <% end %><br/>
+</table>
+
+<h1><br></h1>
+
+  <hr>
+  <h1>
+    Q101〜Q130: 以下の質問についてあてはまる評価を選んでください。
+  </h1>
+  <hr>
+<table class="form_table">
+  <tr class="th_tr">
+    <th class="_q_">
+    </th>
+    <th class="q_th">
+    </th>
+    <th class="form_th">
+      <div class="node_th">
+        <div style="float: left">当てはまる</div>
+        <div style="text-align: right">当てはまらない</div>
+      </div>
+    </th>
+  </tr>
+  <% @questions_101_130.each.with_index(101) do |(q_key, q_value), q_i| %>
+      <tr class="td_tr">
+      <td>Q<%= q_i %></td>
+      <td><label><%= q_value %></label></td>
+      <td class="form">
+        <div class="nodes">
+        <% @answers_101_130.each do |a_key, a_value| %>
+            <div class="node">
+              <%= form.radio_button q_key, a_key, required: true, class: "form__radio", type: "radio" %>
+              <label class="form__label" for="pams_answer_<%= q_key %>_<%= a_key %>"><span class="indicator"><%= a_value %></span></label>
+            </div>
+        <% end %>
+        </div>
+      </td>
+      </tr>
+  <% end %><br/>
+</table>
+
+
+<h1><br></h1>
+
+  <hr>
+  <h1>
+    Q131〜Q140: 以下の10項目についてあてはまる評価を選んでください。(10点満点)
+  </h1>
+  <hr>
+
+<table class="form_table">
+  <tr class="th_tr">
+    <th class="_q_">
+    </th>
+    <th class="q_th">
+    </th>
+    <th class="form_th">
+      <div class="node_th">
+        <div style="float: left">当てはまる</div>
+        <div style="text-align: right">当てはまらない</div>
+      </div>
+    </th>
+  </tr>
+  <% @questions_131_140.each.with_index(131) do |(q_key, q_value), q_i| %>
+      <tr class="td_tr">
+      <td>Q<%= q_i %></td>
+      <td><label><%= q_value %></label></td>
+      <td class="form">
+        <div class="nodes">
+        <% @answers_131_140.each do |a_key, a_value| %>
+            <div class="node">
+              <%= form.radio_button q_key, a_key, required: true, class: "form__radio", type: "radio" %>
+              <label class="form__label" for="pams_answer_<%= q_key %>_<%= a_key %>"><span class="indicator"><%= a_value %></span></label>
+            </div>
+        <% end %>
+        </div>
+      </td>
+      </tr>
+  <% end %><br/>
+</table>
+
+<h1><br></h1>
+  <hr>
+  <h1>
+    Q141〜Q150: 以下の10項目に順位をつけてください。
+  </h1>
+  <hr>
+
+<table class="form_table">
+  <tr class="th_tr">
+    <th class="_q_">
+    </th>
+    <th class="q_th">
+    </th>
+    <th class="form_th">
+      <div class="node_th">
+        <div style="float: left">1位</div>
+        <div style="text-align: right">10位</div>
+      </div>
+    </th>
+  </tr>
+  <% @questions_141_150.each.with_index(141) do |(q_key, q_value), q_i| %>
+      <tr class="td_tr">
+      <td>Q<%= q_i %></td>
+      <td><label><%= q_value %></label></td>
+      <td class="form">
+        <div class="nodes">
+        <% @answers_141_150.each do |a_key, a_value| %>
+            <div class="node">
+              <%= form.radio_button q_key, a_key, required: true, class: "form__radio", type: "radio" %>
+              <label class="form__label" for="pams_answer_<%= q_key %>_<%= a_key %>"><span class="indicator"><%= a_value %></span></label>
+            </div>
+        <% end %>
+        </div>
+      </td>
+      </tr>
+  <% end %><br/>
+</table>
+  
+
+  <%= form.hidden_field :fin_flag, :value => true %><br/>
+
+  <%= form.hidden_field :user_id, value: current_user.id %><br/>
+
+  <div class="actions">
+    <%= form.submit "回答を送信する", class: "actions-button", type: "submit" %>
+  </div>
+<% end %>

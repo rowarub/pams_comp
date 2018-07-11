@@ -1,0 +1,627 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--<meta name="viewport" content="width=1188,initial-scale=1">-->
+<%= stylesheet_link_tag "pams/style_2", :media => "all" %>
+<title>PaMS_img_7</title>
+</head>
+
+<body>
+<section id="page-1" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p>
+      </div>
+    </div>
+  </header>
+  <main class="row">
+    <div class="col left">
+      <h2 class="box">パーソナリティ</h2>
+      <section id="chart-1">
+        <div class="ctr">
+          <div class="chart-container" style="width: 80mm; height: 80mm; margin: -25px 100px 0px;">
+            <canvas id="chart1-3-l"></canvas>
+            <script>
+            var ctx1_3_l = document.getElementById('chart1-3-l').getContext('2d');
+            var chart1_3_l = new Chart(ctx1_3_l, {
+                // 作成するグラフの種類
+                type: 'radar',
+
+                // ラベルとデータセットを設定
+                data: {
+                    labels: [
+                  "楽観性",
+                  "充実性",
+                  "内向/外向",
+                  "思慮/行動",
+                  "積極性",
+                  "感受性",
+                  "尊重性",
+                  "柔軟/革新",
+                  "論理/直観",
+                  "協調性"
+                ],
+                    datasets: [{
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(243, 152, 0)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(243, 152, 0)',
+                        data: [<%= @result[0] %>, <%= @result[1] %>, <%= @result[2] %>, <%= @result[3] %>, <%= @result[4] %>, <%= @result[5] %>, , , , ],
+                    },{
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(34, 172, 56)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(34, 172, 56)',
+                        data: [<%= @result[0] %>, , , , , <%= @result[5] %>, <%= @result[6] %>, <%= @result[7] %>, <%= @result[8] %>, <%= @result[9] %>],
+                    }]
+                },
+
+                // オプション設定
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scale: {
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                  },
+                  angleLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  gridLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  yAxes: [{
+                    ticks: {
+                      max: 10,
+                      min: 0,
+                      stepSize: 10
+                    }
+                  }]
+                },
+              }
+            });
+            </script>
+
+          </div>
+        </div>
+      </section>
+      <section id="score-1" class="score-list">
+        <table>
+          <tr>
+            <th>楽観性</th>
+            <td class="score"><%= @result[0] %>点</td>
+            <td class="score-content">物事を良い方向に捉える傾向。またはその方向性。前向きさ、タフネスさ</td>
+          </tr>
+          <tr>
+            <th>充実性</th>
+            <td class="score"><%= @result[1] %>点</td>
+            <td class="score-content">今の心の状態が満たされているかの度合い。心の余裕、安心、落ち着きを保つ素質</td>
+          </tr>
+          <tr>
+            <th>内向/外向</th>
+            <td class="score"><%= @result[2] %>点</td>
+            <td class="score-content">心が周囲や環境等の外に向いているか、自身の精神性や思慮等の内に向いているか</td>
+          </tr>
+          <tr>
+            <th>思慮/行動</th>
+            <td class="score"><%= @result[3] %>点</td>
+            <td class="score-content">深く洞察し納得し行動するか、考える前に積極的に行動をし結論を導くかの姿勢</td>
+          </tr>
+          <tr>
+            <th>積極性</th>
+            <td class="score"><%= @result[4] %>点</td>
+            <td class="score-content">物事への取り組む意欲。進んで働きかける姿勢。アクティブさ。</td>
+          </tr>
+          <tr>
+            <th>感受性</th>
+            <td class="score"><%= @result[5] %>点</td>
+            <td class="score-content">物事に気づく力の源。体験や経験をした時の心の動きの大きさ。</td>
+          </tr>
+          <tr>
+            <th>尊重性</th>
+            <td class="score"><%= @result[6] %>点</td>
+            <td class="score-content">周囲と比較し、一人ひとりの違いを認め、その個性を大切にしたいと思える。</td>
+          </tr>
+          <tr>
+            <th>柔軟/革新</th>
+            <td class="score"><%= @result[7] %>点</td>
+            <td class="score-content">自身を貫き周囲を変革するか、周囲の考えを受容し環境に適応するかの欲求的態度</td>
+          </tr>
+          <tr>
+            <th>論理/直感</th>
+            <td class="score"><%= @result[8] %>点</td>
+            <td class="score-content">物事の捉え方が、知識や情報を基にした論理重視か、自身の感覚重視かの基準</td>
+          </tr>
+          <tr>
+            <th>協調性</th>
+            <td class="score"><%= @result[9] %>点</td>
+            <td class="score-content">周囲を尊重し調和をとりながら、互いに助け合い、譲り合いながら目標に向かう力</td>
+          </tr>
+        </table>
+      </section>
+    </div>
+    <div class="col right">
+      <section id="type">
+        <h2 class="type">あなたは「<%= @condition_branch_1[0] %>」タイプ</h2>
+        <div class="type-content">
+          <h3 class="type">タイプ説明</h3>
+          <p><%= @condition_branch_1[1] %></p>
+          <h3 class="type">仕事上での長所</h3>
+          <ul>
+            <% @condition_branch_1[2].each do |cd| %>
+              <li><%= cd %></li>
+            <% end %>
+          </ul>
+          <h3 class="type">仕事上での短所</h3>
+          <ul>
+            <% @condition_branch_1[3].each do |cd| %>
+              <li><%= cd %></li>
+            <% end %>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+</section>
+<section id="page-2" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="row">
+      <div class="col left flex dircol">
+        <h2 class="box">欲求のバランス</h2>
+        <p><%= @condition_branch_2_1 %></p>
+        <div class="hor-graph1">
+          <div class="left-box green">公的</div>
+          <div class="graph">
+            <div class="bar" style="left: <%= @result_4_ave %>%"></div>
+          </div>
+          <div class="right-box orange">私的</div>
+        </div>
+      </div>
+      <div class="col right">
+        <div class="chart">
+          <div class="ctr">
+            <div style="width: 120mm; height: 50mm; margin : 0 auto;">
+            <canvas id="chart1_3_r"></canvas>
+            <script>
+            var ctx1_3_r = document.getElementById('chart1_3_r').getContext('2d');
+            var chart1_3_r = new Chart(ctx1_3_r, {
+                // 作成するグラフの種類
+                type: 'radar',
+
+                // ラベルとデータセットを設定
+                data: {
+                    labels: [
+                  "楽観性",
+                  "充実性",
+                  "内向/外向",
+                  "思慮/行動",
+                  "積極性",
+                  "感受性",
+                  "尊重性",
+                  "柔軟/革新",
+                  "論理/直観",
+                  "協調性"
+                ],
+                    datasets: [{
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(243, 152, 0)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(243, 152, 0)',
+                        data: [<%= @result[0] %>, <%= @result[1] %>, <%= @result[2] %>, <%= @result[3] %>, <%= @result[4] %>, <%= @result[5] %>, , , , ],
+                    },{
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                        borderColor: [
+                    'rgb(34, 172, 56)',
+                  ],
+                  pointRadius: 3,
+                  pointBackgroundColor: 'rgb(34, 172, 56)',
+                        data: [<%= @result[0] %>, , , , , <%= @result[5] %>, <%= @result[6] %>, <%= @result[7] %>, <%= @result[8] %>, <%= @result[9] %>],
+                    }]
+                },
+
+                // オプション設定
+                options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false
+                },
+                scale: {
+                  ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                  },
+                  angleLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  gridLines: {
+                    color: 'rgb(0, 0, 0)'
+                  },
+                  yAxes: [{
+                    ticks: {
+                      max: 10,
+                      min: 0,
+                      stepSize: 10
+                    }
+                  }]
+                },
+              }
+            });
+            </script>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col left">
+        <div class="score-cm">
+          <div class="score-item">内向/外向</div>
+          <div class="score"><%= @result[2] %>点</div>
+          <div class="description">心が周囲や環境等の外面に向いているか、自身の精神性や思慮等の内面に向いているかの方</div>
+        </div>
+        <div class="hor-graph1">
+          <div class="left-box">内向型</div>
+          <div class="graph">
+            <div class="bar" style="left: <%= 100 - @result[2] %>%"></div>
+          </div>
+          <div class="right-box">外向型</div>
+        </div>
+      </div>
+      <div class="col right">
+        <p class="comment"><%= @condition_branch_2_2 %></p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col left">
+        <div class="score-cm">
+          <div class="score-item">思慮/行動</div>
+          <div class="score"><%= @result[3] %>点</div>
+          <div class="description">深く洞察し、納得してから行動するか、考える前に積極的に行動をし結論を導くかの姿勢。</div>
+        </div>
+        <div class="hor-graph1">
+          <div class="left-box">思慮型</div>
+          <div class="graph">
+            <div class="bar" style="left: <%= 100 - @result[3] %>%"></div>
+          </div>
+          <div class="right-box">行動型</div>
+        </div>
+      </div>
+      <div class="col right">
+        <p class="comment"><%= @condition_branch_2_3 %></p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col left">
+        <div class="score-cm">
+          <div class="score-item">論理/直感</div>
+          <div class="score"><%= @result[7] %>点</div>
+          <div class="description">物事の捉え方が、知識や情報を基にした論理重視か、自身の内面が発する感覚重視かの基準</div>
+        </div>
+        <div class="hor-graph1">
+          <div class="left-box">論理型</div>
+          <div class="graph">
+            <div class="bar" style="left: <%= 100 - @result[7] %>%"></div>
+          </div>
+          <div class="right-box">直感型</div>
+        </div>
+      </div>
+      <div class="col right">
+        <p class="comment"><%= @condition_branch_2_4 %></p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col left">
+        <div class="score-cm">
+          <div class="score-item">柔軟/革新</div>
+          <div class="score"><%= @result[8] %>点</div>
+          <div class="description">自身の考えを貫き周囲を変革するか、周囲の考えを受容し環境に適応するかの欲求的態度。</div>
+        </div>
+        <div class="hor-graph1">
+          <div class="left-box">柔軟型</div>
+          <div class="graph">
+            <div class="bar" style="left: <%= 100 - @result[8] %>%"></div>
+          </div>
+          <div class="right-box">革新型</div>
+        </div>
+      </div>
+      <div class="col right">
+        <p class="comment"><%= @condition_branch_2_5 %></p>
+      </div>
+    </section>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+</section>
+<section id="page-3" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="row">
+      <div class="col left flex mdl">
+        <div class="hor-graph2">
+          <div class="score-cm">
+            <div class="score-item">楽観性</div>
+            <div class="score"><%= @result[0] %>点</div>
+            <div class="description">物事を良い方向に捉える傾向。またはその方向性。前向きさ、タフネスさ。</div>
+          </div>
+          <div class="bar" style="width: <%= @result[0] %>%;"></div>
+        </div>
+      </div>
+      <div class="col right flex mdl">
+        <p class="comment"><%= @condition_branch_3_1 %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left flex mdl">
+        <div class="hor-graph2">
+          <div class="score-cm">
+            <div class="score-item">充実性</div>
+            <div class="score"><%= @result[1] %>点</div>
+            <div class="description">今の心の状態が満たされているかの度合い。心の余裕、安心、落ち着きを保つ素</div>
+          </div>
+          <div class="bar" style="width: <%= @result[1] %>%;"></div>
+        </div>
+      </div>
+      <div class="col right flex mdl">
+        <p class="comment"><%= @condition_branch_3_2 %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left flex mdl">
+        <div class="hor-graph2">
+          <div class="score-cm">
+            <div class="score-item">積極性</div>
+            <div class="score"><%= @result[4] %>点</div>
+            <div class="description">物事への取り組む意欲。進んで働きかける姿勢。アクティブさ。</div>
+          </div>
+          <div class="bar" style="width: <%= @result[4] %>%;"></div>
+        </div>
+      </div>
+      <div class="col right flex mdl">
+        <p class="comment"><%= @condition_branch_3_3 %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left flex mdl">
+        <div class="hor-graph2">
+          <div class="score-cm">
+            <div class="score-item">感受性</div>
+            <div class="score"><%= @result[5] %>点</div>
+            <div class="description">物事に気づく力の源。体験や経験をした時の心の動きの大きさ。</div>
+          </div>
+          <div class="bar" style="width: <%= @result[5] %>%;"></div>
+        </div>
+      </div>
+      <div class="col right flex mdl">
+        <p class="comment"><%= @condition_branch_3_4 %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left flex mdl">
+        <div class="hor-graph2">
+          <div class="score-cm">
+            <div class="score-item">尊重性</div>
+            <div class="score"><%= @result[6] %>点</div>
+            <div class="description">周囲と比較し、一人ひとりの違いを認め、その個性を大切にしたいと思うことができ</div>
+          </div>
+          <div class="bar" style="width: <%= @result[6] %>%;"></div>
+        </div>
+      </div>
+      <div class="col right flex mdl">
+        <p class="comment"><%= @condition_branch_3_5 %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left flex mdl">
+        <div class="hor-graph2">
+          <div class="score-cm">
+            <div class="score-item">協調性</div>
+            <div class="score"><%= @result[9] %>点</div>
+            <div class="description">周囲の人を調和をとりながら、互いに助け合い、譲り合いながら目標に向かっていける</div>
+          </div>
+          <div class="bar" style="width: <%= @result[9] %>%;"></div>
+        </div>
+      </div>
+      <div class="col right flex mdl">
+        <p class="comment"><%= @condition_branch_3_6 %></p>
+      </div>
+    </div>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+</section>
+<section id="page-4" class="page">
+  <header>
+    <div class="wrap">
+      <h1 class="header-title">Personality and Matching Scale</h1>
+      <div class="profile">
+        <p class="item"><span class="h">所属</span>株式会社○○○○○○</p>
+        <p class="item"><span class="h">所属部署</span>○○○○○○</p>
+        <p class="item"><span class="h">役職</span>○○○○○○</p>
+        <p class="item"><span class="h">入社歴</span>○○年目</p>
+        <p class="item"><span class="h">性別</span>男性</p>
+        <p class="item"><span class="h">氏名</span>○○○○○○</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="row">
+      <div class="col left">
+        <div class="flex mdl">
+          <h2 class="box">ストレス耐性</h2>
+          <p style="margin-left: 5mm;">精神状態の浮き沈みをパロメーターで表しています。</p>
+        </div>
+        <div class="para-graph2">
+          <!-- <img class="graph" src="figure4_1.png" alt="パロメーター"> -->
+<canvas id="ChartDemo" height="129px"></canvas>
+<script>
+var ctx = document.getElementById("ChartDemo").getContext('2d');
+var ChartDemo = new Chart(ctx, {
+   type: 'line',
+   data: {
+      labels: ["", "", "", "", "", ""],
+      datasets: [
+      {
+         label: "Chart-1",
+         borderColor: 'rgb(84, 195, 241)',
+         fill: false,
+         data: [<%= @result[0] %>, <%= @result[1] %>, <%= @result[6] %>, <%= @result[5] %>, <%= @result[9] %>, <%= @result[4] %>],
+      },
+      ]
+   },
+options: {
+          legend: {
+            display: false
+         },
+      scales: {
+        xAxes: [{
+          display: true,
+          stacked: false,
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          gridLines: {
+            drawBorder: false
+          },
+          ticks: {
+            display: false
+               }
+        }]
+      }
+    }
+});
+</script>
+        </div>
+      </div>
+      <div class="col right">
+        <div class="flex mdl">
+          <div class="stress-box">ストレス耐性ポイント<span class="score"><%= @condition_branch_4_1_1 %>点</span></div>
+          <div id="point-main"><img src="img/point_main.png" alt=""></div>
+        </div>
+        <p class="comment" style="margin-top: 5mm;"><%= @condition_branch_4_1_2 %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left">
+        <div class="stress">
+          <div class="item">抑うつ性</div>
+          <div class="lmh"><%= @condition_branch_4_2[0] %></div>
+          <div class="description">予期せぬ出来事が起きた際の落ち込みやすい傾向。</div>
+          <div class="point-img">
+            <%= image_tag @condition_branch_4_2[2], alt: "", class: "point" %>
+          </div>
+        </div>
+        <p class="comment"><%= @condition_branch_4_2[1] %></p>
+      </div>
+      <div class="col right">
+        <div class="stress">
+          <div class="item">神経質</div>
+          <div class="lmh"><%= @condition_branch_4_5[0] %></div>
+          <div class="description">物事をどれだけ神経質にとらえているかの度合い。</div>
+          <div class="point-img">
+            <%= image_tag @condition_branch_4_5[2], alt: "", class: "point" %>
+          </div>
+        </div>
+        <p class="comment"><%= @condition_branch_4_5[1] %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left">
+        <div class="stress">
+          <div class="item">気分の安定性</div>
+          <div class="lmh"><%= @condition_branch_4_3[0] %></div>
+          <div class="description">日常において、どれだけ安定した精神状態にあるか。</div>
+          <div class="point-img">
+            <%= image_tag @condition_branch_4_3[2], alt: "", class: "point" %>
+          </div>
+        </div>
+        <p class="comment"><%= @condition_branch_4_3[1] %></p>
+      </div>
+      <div class="col right">
+        <div class="stress">
+          <div class="item">調和性</div>
+          <div class="lmh"><%= @condition_branch_4_6[0] %></div>
+          <div class="description">周囲とどれだけ調和を図って活動できるかの傾向。</div>
+          <div class="point-img">
+            <%= image_tag @condition_branch_4_6[2], alt: "", class: "point" %>
+          </div>
+        </div>
+        <p class="comment"><%= @condition_branch_4_6[1] %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col left">
+        <div class="stress">
+          <div class="item">劣等感</div>
+          <div class="lmh"><%= @condition_branch_4_4[0] %></div>
+          <div class="description">日常において、どれだけ安定した精神状態にあるか。</div>
+          <div class="point-img">
+            <%= image_tag @condition_branch_4_4[2], alt: "", class: "point" %>
+          </div>
+        </div>
+        <p class="comment"><%= @condition_branch_4_4[1] %></p>
+      </div>
+      <div class="col right">
+        <div class="stress">
+          <div class="item">攻撃性</div>
+          <div class="lmh"><%= @condition_branch_4_7[0] %></div>
+          <div class="description">他者や物に対して攻撃的になる傾向。</div>
+          <div class="point-img">
+            <%= image_tag @condition_branch_4_7[2], alt: "", class: "point" %>
+          </div>
+        </div>
+        <p class="comment"><%= @condition_branch_4_7[1] %></p>
+      </div>
+    </div>
+  </main>
+  <footer>Copyright &copy; 2018 RE-JAPAN.inc All Rights Reserved</footer>
+  <%= link_to 'ホーム画面へ戻る', pams_answers_path %>
+</section>
+</body>
+</html>

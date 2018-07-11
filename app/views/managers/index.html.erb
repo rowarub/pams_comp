@@ -1,0 +1,42 @@
+<%= stylesheet_link_tag "pams/temporary", :media => "all" %>
+
+<h3>ようこそ<%= current_manager.email %>さん</h3>
+
+
+<table>
+  <tbody>
+  <tr>
+    <th>社員名</th>
+    <th>社員ID</th>
+  </tr>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <% unless user.user_name.nil? %>
+          <td><%= user.user_name %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= user.email %></td>
+        <% if PamsAnswer.find_by(user_id: user.id, fin_flag: 1) %>
+          <td><%= link_to '相性診断', relations_manager_path(id: current_manager.id, user_id: user.id) %></td>
+        <% else %>
+          <td>※回答がありません※</td>
+        <% end %>
+        <td><%= link_to 'user情報入力', edit_user_path(id: current_manager.id, user_id: user.id) %></td>
+        <% unless PamsAnswer.find_by(user_id: user.id, fin_flag: 0) %>
+          <%= form_for [@new_pamsanswer] do |f| %>
+            <%= f.hidden_field :user_id, value: user.id %>
+            <td><%= f.submit 'アンケート作成' %></td>
+          <% end %>
+        <% else %>
+          <td>未回答のアンケートがあります</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to '回答を確認する', manager_path(id: current_manager.id) %>
+<%= link_to 'user作成', new_user_registration_path %>
